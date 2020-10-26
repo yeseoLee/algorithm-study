@@ -1,19 +1,19 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define SWAP(a,b) {int t; t=a; a=b; b=t;}
+#define SWAP(a,b) {int t; t=a; a=b; b=t;} //swap ë§¤í¬ë¡œ í•¨ìˆ˜
 void bubbleSort(int* ar, int n);
 void printArray(int* ar, int n);
 
 int main() {
 	int n, i;
 	int* ar;
-	scanf("%d", &n); //¹è¿­ÀÇ °³¼ö
-	ar = (int*)malloc(sizeof(int) * n); //±æÀÌ°¡ nÀÎ ¹è¿­ µ¿ÀûÇÒ´ç
+	scanf("%d", &n); //ë°°ì—´ì˜ ê°œìˆ˜
+	ar = (int*)malloc(sizeof(int) * n); //ê¸¸ì´ê°€ nì¸ ë°°ì—´ ë™ì í• ë‹¹
 	for (i = 0; i < n; i++) {
 		scanf("%d", (ar+i)); 
 	}
-	bubbleSort(ar, n); //Á¤·Ä
-	printArray(ar, n); //Ãâ·Â
+	bubbleSort(ar, n); //ì •ë ¬
+	printArray(ar, n); //ì¶œë ¥
 	return 0;
 }
 void bubbleSort(int* ar, int n) {
@@ -22,7 +22,7 @@ void bubbleSort(int* ar, int n) {
 		for (j = 0; j < n - 1 - i; j++) { 
 			if (ar[j] >= ar[j+1]) { 
 				SWAP(ar[j], ar[j + 1]);
-				//ÀÎÁ¢ÇÑ µÎ °ªÀ» ºñ±³ÇÏ¸ç Å« °ªÀ» °è¼Ó µÚ·Î º¸³¿ -> ¿À¸§Â÷¼ø Á¤·Ä
+				//ì¸ì ‘í•œ ë‘ ê°’ì„ ë¹„êµí•˜ë©° í° ê°’ì„ ê³„ì† ë’¤ë¡œ ë³´ëƒ„ -> ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
 			}
 		}
 	}
