@@ -19,7 +19,7 @@ int main() {
 void bubbleSort(int* ar, int n) {
 	int i,j;
 	for (i = 0; i < n - 1; i++) { 
-		for (j = 0; j < n - 1 - i; j++) { 
+		for (j = 0; j < n - 1 - i; j++) { //n-1개를 정렬하면 마지막 1개는 자동으로 정렬된다
 			if (ar[j] >= ar[j+1]) { 
 				SWAP(ar[j], ar[j + 1]);
 				//인접한 두 값을 비교하며 큰 값을 계속 뒤로 보냄 -> 오름차순 정렬
