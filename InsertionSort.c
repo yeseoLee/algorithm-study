@@ -18,6 +18,27 @@ void insertionSort(int* ar, int n) {
 		// key보다 작은값(ar[i]) 앞에, 큰값(ar[i+2]) 뒤에 key 삽입
 	}
 }
+/* 또는
+void insertionSort(int* ar, int n) {
+	int i, j;
+	int key;
+	for (j = 1; j < n; j++) {
+		key = ar[j]; 
+		for (i = j - 1; i >= 0; i--) {
+			if (ar[i] > key) { 
+				//key의 앞자리 값이 키값보다 크면
+				ar[i + 1] = ar[i];
+				//key 보다 더 작은 값이 나올 때까지 한칸씩 이동
+			}
+			else {
+				break;
+			}
+		}
+		ar[i + 1] = key;
+		// key보다 작은값(ar[i]) 앞에, 큰값(ar[i+2]) 뒤에 key 삽입
+	}
+}
+*/
 void printArray(int* ar, int n) {
 	int i;
 	for (i = 0; i < n; i++) {
