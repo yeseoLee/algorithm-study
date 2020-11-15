@@ -1,0 +1,17 @@
+n=int(input())
+x=665
+cnt=0
+
+while(cnt!=n):
+    x+=1
+    a=x
+    six=0
+    while(a!=0 and six!=3):
+        if(a%10==6):
+            six+=1
+        else:
+            six=0
+        a//=10
+    if(six==3):
+        cnt+=1
+print(x)

@@ -1,0 +1,11 @@
+t= int(input()) #Test Case
+li=[]
+for i in range(t):
+    x,y= map(int,input().split())
+    li.append([x,y,1])
+
+for i in range(t):
+    for j in range(t):
+        if(li[i][0]<li[j][0] and li[i][1]<li[j][1]):
+            li[i][2]+=1
+    print(li[i][2],end=" ")

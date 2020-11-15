@@ -1,0 +1,11 @@
+def hanoi(start,via,to,n):
+    if(n==1):
+        print(start + " " + to)
+    else:
+        hanoi(start,to,via,n-1)
+        print(start + " " + to)
+        hanoi(via,start,to,n-1)
+
+n=int(input())
+print(2**n-1)
+hanoi("1","2","3",n)
