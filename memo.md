@@ -10,3 +10,5 @@
  || ex. sorted(e, key = lambda x : (x[0], -x[1])) (-를 붙이면, 현재 정렬차순과 반대로 하게 된다.)
  11/14 | n 개의 정수를 입력받아 리스트에 저장할 때 a=[int(sys.stdin.readline())) for i in range(n)]
 11/15 | from collections import Counter -> 문자열에서 문자 개수 셀 때, 배열에서 같은 값 개수 셀 때 유용하다. 사용법을 잘 익혀두자.
+11/16 | list = str.split() : 문자열 -> 리스트 ''.join( list ) : 리스트 -> 문자열
+|| print('\n'.join([''.join([str(i) for i in row]) for row in arr]))
