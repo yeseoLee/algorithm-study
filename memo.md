@@ -12,4 +12,4 @@
 11/15 | from collections import Counter -> 문자열에서 문자 개수 셀 때, 배열에서 같은 값 개수 셀 때 유용하다. 사용법을 잘 익혀두자.
 11/16 | list = str.split() : 문자열 -> 리스트 ''.join( list ) : 리스트 -> 문자열
 || print('\n'.join([''.join([str(i) for i in row]) for row in arr]))
-11/17 | format함수 (문자열 포매팅)
+11/17 | .format함수 (문자열 포매팅, 자바스크립트 닮았다)
