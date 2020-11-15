@@ -1,0 +1,19 @@
+x,y,z=map(int,input().split())
+while(max(x,y,z)!=0):
+    c=max(x,y,z)
+    if(x==c):
+        if(x**2==y**2+z**2):
+            print("right")
+        else:
+            print("wrong")
+    elif(y==c):
+        if(y**2==x**2+z**2):
+            print("right")
+        else:
+            print("wrong")
+    else:
+        if(z**2==y**2+x**2):
+            print("right")
+        else:
+            print("wrong")
+    x,y,z=map(int,input().split())

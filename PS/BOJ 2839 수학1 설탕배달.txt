@@ -1,0 +1,21 @@
+A=3
+B=5
+N=int(input())
+if(N>=B):
+    x= N//B
+    N = N%B
+    while(1):
+        if(N%3==0):
+            x+=N//A
+            break
+        elif(x==0):
+            x=-1
+            break
+        else:
+            N+=B
+            x-=1
+elif(N%3==0):
+    x=1
+else:
+    x=-1
+print(x)
