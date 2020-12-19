@@ -13,3 +13,4 @@
 11/16 | list = str.split() : 문자열 -> 리스트 ''.join( list ) : 리스트 -> 문자열
 || print('\n'.join([''.join([str(i) for i in row]) for row in arr]))
 11/17 | .format함수 (문자열 포매팅, 자바스크립트 닮았다)
+12/19 | line = [sys.stdin.readline().split() for i in range(n)] 한줄에 여러개 원소를 n줄 입력받기, \n까지 입력되기 때문에 split()으로 잘라준다.
