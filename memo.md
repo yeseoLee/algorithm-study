@@ -14,4 +14,4 @@
 11/16 | list = str.split() : 문자열 -> 리스트 ''.join( list ) : 리스트 -> 문자열
 || print('\n'.join([''.join([str(i) for i in row]) for row in arr]))
 11/17 | .format함수 (문자열 포매팅, 자바스크립트 닮았다)
-12/19 | 
+12/19 | 그리디 알고리즘 의 예시중 하나인 스케쥴링은 빠른종료시간일 때 반례 없는 최적해를 가진다.
