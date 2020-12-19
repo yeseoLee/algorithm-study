@@ -9,8 +9,9 @@
 11/05 | 오름차순 또는 내림차순 등의 정렬에서 정렬 조건이 여러 개일 경우(비교할 아이템의 요소가 복수 개일 경우), 튜플로 그 순서를 내보내주면 된다.  
  || ex. sorted(e, key = lambda x : (x[0], -x[1])) (-를 붙이면, 현재 정렬차순과 반대로 하게 된다.)
  11/14 | n 개의 정수를 입력받아 리스트에 저장할 때 a=[int(sys.stdin.readline())) for i in range(n)]
+ || line = [sys.stdin.readline().split() for i in range(n)] 한줄에 여러개 원소를 n줄 입력받기, \n까지 입력되기 때문에 split()으로 잘라준다.
 11/15 | from collections import Counter -> 문자열에서 문자 개수 셀 때, 배열에서 같은 값 개수 셀 때 유용하다. 사용법을 잘 익혀두자.
 11/16 | list = str.split() : 문자열 -> 리스트 ''.join( list ) : 리스트 -> 문자열
 || print('\n'.join([''.join([str(i) for i in row]) for row in arr]))
 11/17 | .format함수 (문자열 포매팅, 자바스크립트 닮았다)
-12/19 | line = [sys.stdin.readline().split() for i in range(n)] 한줄에 여러개 원소를 n줄 입력받기, \n까지 입력되기 때문에 split()으로 잘라준다.
+12/19 | 
