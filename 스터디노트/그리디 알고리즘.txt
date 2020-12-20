@@ -6,3 +6,4 @@
 아래 블로그에 빠른시작시간/빠른종료시간/
 가장 짧은 작업 등의 반례 와 예시가 있다.
 https://helloworld2016.tistory.com/24
+https://velog.io/@jjg2362/Algorithm그리디-알고리즘탐욕-알고리즘에-대해서-알아보자
