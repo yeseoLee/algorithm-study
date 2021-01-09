@@ -3,7 +3,7 @@ class Stack:
     def __init__(self, limit: int= 100):
         self.top = []
         self.limit = limit
-    #스택 크기 출력
+    #스택 크기 반환
     def __len__(self) -> bool :
         return len(self.top)
     #스택 내부 자료를 string으로 변환하여 반환
