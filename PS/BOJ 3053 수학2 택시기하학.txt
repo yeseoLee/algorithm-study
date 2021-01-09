@@ -1,9 +1,0 @@
-import math
-
-r=int(input())
-
-U=math.pi*r*r
-T=2*r*2*r*0.5
-
-print(round(U,6))
-print(round(T,6))

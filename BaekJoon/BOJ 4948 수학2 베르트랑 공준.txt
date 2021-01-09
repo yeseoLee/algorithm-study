@@ -1,0 +1,14 @@
+n = 123456 * 2 + 1
+sieve = [True] * n
+for i in range(2, int(n**0.5) + 1):
+    if sieve[i] == True:
+        for j in range(2*i, n, i):
+            sieve[j] = False
+            
+while True:
+    v=int(input())
+    if(v==0):
+        break
+    print(len([i for i in range(v+1,v*2+1) if(sieve[i])]))
+
+

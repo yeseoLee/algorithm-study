@@ -1,8 +1,0 @@
-a,b,c=map(int,input().split())
-
-if (c-b<=0):
-    n=-1
-else:
-    n=(a/(c-b))
-    n=int(n)+1
-print(n)

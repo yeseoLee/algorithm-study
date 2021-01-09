@@ -1,0 +1,68 @@
+import java.util.Scanner;
+import java.io.IOException;
+
+class Position {
+	int x, y, r;
+}
+
+class Distance {
+	public static double getDistance(int x1, int x2, int y1, int y2) {
+		int xd, yd;
+		double d;
+		if (x1 > x2)
+			xd = x1 - x2;
+		else
+			xd = x2 - x1;
+		if (y1 > y2)
+			yd = y1 - y2;
+		else
+			yd = y2 - y1;
+		d = (xd * xd) + (yd * yd);
+		d = Math.sqrt(d);
+		return d;
+	}
+}
+
+public class Main { // 백준1002
+
+	public static void main(String[] args) throws IOException {
+		Scanner sc = new Scanner(System.in);
+		int cnt;
+		cnt = sc.nextInt();
+		for (int i = 0; i < cnt; i++) {
+			int result = 0;
+			double R;
+			Position A = new Position();
+			Position B = new Position();
+			A.x = sc.nextInt();
+			A.y = sc.nextInt();
+			A.r = sc.nextInt();
+			B.x = sc.nextInt();
+			B.y = sc.nextInt();
+			B.r = sc.nextInt();
+			R = Distance.getDistance(A.x, B.x, A.y, B.y);
+			if (A.x == B.x && A.y == B.y) {
+				if (A.r == B.r)
+					result = -1;
+				else
+					result = 0;
+			} else {
+				if (R > A.r + B.r)
+					result = 0;
+				else if ((int) R == (A.r + B.r))
+					result = 1;
+				else // R<A.r+B.r
+				{
+					if (A.r == B.r + R || B.r == A.r + R)
+						result = 1;
+					else if (A.r > R + B.r || B.r > R + A.r)
+						result = 0;
+					else
+						result = 2;
+				}
+			}
+			System.out.println(result);
+		}
+	}
+
+}

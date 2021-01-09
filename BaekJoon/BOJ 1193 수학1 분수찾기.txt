@@ -1,0 +1,16 @@
+BOJ 1193 수학1 분수찾기
+
+x=int(input())
+n=1
+while(1):
+    if(x>=(n-1)*n/2 + 1):
+        n+=1
+    else:
+        n-=1
+        break
+if(n%2==0):
+    son = x-((n-1)*n/2) #numerator
+else:
+    son= ((n-1)*n/2)+n+1-x
+mom = n+1 - son #denominator
+print("%d/%d" %(son,mom))
