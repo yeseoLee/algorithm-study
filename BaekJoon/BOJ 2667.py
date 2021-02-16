@@ -1,39 +1,46 @@
 import sys
 from collections import deque
-def bfs(x,y,cnt):
-    if(x>=n or y>=n):
-        return
-    if(visited[x][y]==False and graph[x][y]==1):
-        visited[x][y]==True
-        que.append((x,y))
-        while(que):
-            v=que.popleft()
-            graph[v[0]][v[1]]=cnt
-            if(visited[v[0]+1][v[1]]==False and graph[v[0]+1][v[1]]==1):
-                que.append((v[0]+1,v[1]))
-                visited[v[0]+1][v[1]]==True
-            if(visited[v[0]-1][v[1]]==False and graph[v[0]-1][v[1]]==1):
-                que.append((v[0]-1,v[1]))
-                visited[v[0]-1][v[1]]==True
-            if(visited[v[0]][v[1]+1]==False and graph[v[0]][v[1]+1]==1):
-                que.append((v[0],v[1]+1))
-                visited[v[0]][v[1]+1]==True
-            if(visited[v[0]][v[1]-1]==False and graph[v[0]][v[1]-1]==1):
-                que.append((v[0],v[1]-1))
-                visited[v[0]][v[1]-1]==True
-        cnt+=1
-    bfs(x-1,y,cnt)
-    bfs(x+1,y,cnt)
-    bfs(x,y-1,cnt)
-    bfs(x,y+1,cnt)
+que=deque()
+danji=[]
+
+def bfs():
+    global danji
+    for x in range(1,n+1):
+        for y in range(1,n+1):
+            if(visited[x][y]==False and graph[x][y]==1):
+                visited[x][y]=True
+                que.append((x,y))
+                cnt=0
+                while(que):
+                    v=que.popleft()
+                    cnt+=1
+                    if(visited[v[0]+1][v[1]]==False and graph[v[0]+1][v[1]]==1):
+                        que.append((v[0]+1,v[1]))
+                        visited[v[0]+1][v[1]]=True
+                    if(visited[v[0]-1][v[1]]==False and graph[v[0]-1][v[1]]==1):
+                        que.append((v[0]-1,v[1]))
+                        visited[v[0]-1][v[1]]=True
+                    if(visited[v[0]][v[1]+1]==False and graph[v[0]][v[1]+1]==1):
+                        que.append((v[0],v[1]+1))
+                        visited[v[0]][v[1]+1]=True
+                    if(visited[v[0]][v[1]-1]==False and graph[v[0]][v[1]-1]==1):
+                        que.append((v[0],v[1]-1))
+                        visited[v[0]][v[1]-1]=True
+                danji.append(cnt)
         
 n=int(sys.stdin.readline())
 graph=[]
-visited=[[False for i in range(n+2)] f
+visited=[[False for i in range(n+2)] for j in range(n+2)]
 
-         ine().rstrip()+'0'))
+graph.append([0]*(n+2))
+for i in range(n):
+    line=list(map(int,'0'+sys.stdin.readline().rstrip()+'0'))
     graph.append(line)
 graph.append([0]*(n+2))
 
-bfs(0,0,2)
-print(graph)
+bfs()
+danji=sorted(danji)
+print(len(danji))
+for i in danji:
+      print(i)
+    
