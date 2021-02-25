@@ -11,13 +11,19 @@ from collections import deque
 n,w,l=map(int,sys.stdin.readline().split()) #트럭의 수, 다리길이, 최대하중
 truck=list(map(int,sys.stdin.readline().split()))
 time=0 #마지막 차가 들어가기 전까지의 시간만 구하면 된다. 이후 + w
-dq=deque()
+dq=deque(maxlen=w)
 for i in truck:
+    #다리에 트럭이 가득 찼을 때
+    if(len(dq) == w):
+        dq.popleft()
+    #최대하중을 초과할 때
     while(sum(dq)+i>l):
-        dq.pop()
-        if(len(dq)==0):
-            time+=w-1
-    dq.appendleft(i)
+        dq.append(0)
+        time+=1
+        #다리에 트럭이 가득 찼을 때
+        if(len(dq) == w):
+            dq.popleft()
+    dq.append(i)
     time+=1
 time+=w
 
