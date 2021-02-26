@@ -12,6 +12,7 @@ for test in range(t):
     cnt=0 #필요한 지렁이 수
     for i in range(1,n+1):
         for j in range(1,m+1):
+            #배추 발견
             if(arr[i][j]==1):
                 que=deque([(j,i)])
                 arr[i][j]=2 #is visited
