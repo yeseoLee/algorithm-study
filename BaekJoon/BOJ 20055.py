@@ -24,7 +24,7 @@ while(True):
     #내릴 칸에 로봇 있으면
     if(robot[down]==1): 
         robot[down]=0
-    '''#출력
+    '''출력
     for i in range(up,up+2*n):
         print(belt[i%(2*n)],end=" ")
     print("")
