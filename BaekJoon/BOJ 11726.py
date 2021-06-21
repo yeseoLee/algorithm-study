@@ -1,37 +1,17 @@
-n=int(input())
-dp=[0]*(n+1)
-dp[1]=1
-dp[2]=2
-for i in range(3,n+1):
-   dp[i]=dp[i-1]+dp[i-2]
-   dp[i]%=10007
-print(dp[n])
-
+s = [0, 1, 2]
+for i in range(3, 1001):
+    s.append(s[i - 2] + s[i - 1])
+n = int(input())
+print(s[n] % 10007)
 '''
-(1)-1
-1
-
-(2)-2
-11
-2
-
-(3) -3
-111
-12
-
-(4) -5
-1111
-112
-22
-
-(5)-8
-11111
-1112
-122
-
-(6)
-111111
-11112
-1122
-222
+n=int(input())
+if(n<=2):
+   print(n)
+else:
+   dp=[0 for _ in range(n+1)]
+   dp[1]=1
+   dp[2]=2
+   for i in range(3,n+1):
+       dp[i]=(dp[i-1]+dp[i-2])%10007
+   print(dp[n])
 '''
