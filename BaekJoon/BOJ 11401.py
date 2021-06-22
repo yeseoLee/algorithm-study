@@ -1,12 +1,3 @@
-<<<<<<< Updated upstream
-t=int(input())
-for i in range(t):
-    n=int(input())
-    arr=[list(map(int,input().split())) for _ in range(2)]
-    dp=[[0]*n for _ in range(2)]
-    for a in range(2):
-        for b in range(n):
-=======
 '''
 1. 파스칼의 삼각형 (dp)
 nCk = n-1Ck-1 + n-1Ck
@@ -47,4 +38,3 @@ fac2 = (fac[n-k] * fac[k]) % p
 
 result=(fac1%p) * (power(fac2,p-2)%p)
 print(result%p)
->>>>>>> Stashed changes
