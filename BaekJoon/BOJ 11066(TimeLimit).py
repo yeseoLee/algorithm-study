@@ -1,3 +1,26 @@
+'''
+import sys
+def solve(x):
+    cost_sum=0
+    for i in range(k-1):
+        now_cost=x[0]+x[1]
+        now_idx=0
+        for j in range(1,len(x)-1):
+            if(now_cost>x[j]+x[j+1]):
+                now_cost=x[j]+x[j+1]
+                now_idx=j
+        
+        cost_sum+=now_cost
+        x[now_idx]=now_cost
+        del x[now_idx+1]        
+    return cost_sum       
+t=int(sys.stdin.readline())
+for i in range(t):
+    k=int(sys.stdin.readline())
+    ch=list(map(int,sys.stdin.readline().split()))
+    print(solve(ch))
+'''
+'''
 import sys
 inf=100000000
 def solve(s,e):
@@ -21,6 +44,8 @@ for i in range(t):
     dp=[[0 for i in range(k+1)] for j in range(k+1)]
     solve(0,k)
     print(dp[0][k-1])
+'''
+
 '''
 import sys
 def sumFile(ch):
