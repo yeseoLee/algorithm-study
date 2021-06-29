@@ -74,4 +74,37 @@ def check(x):
 recursive(0)
 print(res)
 
+'''
+def possible(x,y):
+    for i in range(n):
+        for j in range(n):
+            if(visited[x][y]==True):
+                return False
+            if(arr[i][j]==1 and (x==i or y==j or (x-y)==(i-j) or (x+y)==(i+j) )):
+                    return False
+    return True
+cnt=0
+def queen(k):
+    global cnt
+    if(k==n): # 다 채움
+        cnt+=1
+        return
+    for i in range(n):
+        if(possible(k,i)):
+            visited[k][i]=True
+            arr[k][i]=1
+            queen(k+1)
+            arr[k][i]=0
+        #더 이상 둘 곳 없음
+        if(k!=0):
+            arr[k]=[0]*n #현재 열 체스판 초기화
+            visited[k]=[0]*n #현재 열 방문여부 초기화
+n=int(input())
+arr=[[0]*n for _ in range(n)]
+visited=[[False]*n for _ in range(n)]
+
+queen(0)
+print(cnt)
+'''
+
 
