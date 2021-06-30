@@ -1,10 +1,11 @@
 import sys
 import itertools
+from math import factorial as Fac
 def score(team):
     s=0
-    x=itertools.combinations(team,2)
-    for i in x:
-        s+=arr[i[0]-1][i[1]-1]+arr[i[1]-1][i[0]-1]
+    for i in range(n//2 - 1):
+        for j in range(i+1,n//2):
+            s+=arr[team[i]][team[j]]+arr[team[j]][team[i]]
     return s
 
 input=sys.stdin.readline
@@ -13,13 +14,14 @@ arr=[]
 for i in range(n):
     arr.append(list(map(int,input().rstrip().split())))
 
-#능력치 차이의 (n-1)(n-2)/2 가지 경우의 수
-c=(n-1)*(n-2)
+#능력치 차이의 nC(n//2) 가지 경우의 수
+c = Fac(n)//(Fac(n//2))**2
 gap=[0]*(c//2)
 
-x=itertools.combinations(range(1,n+1),n//2)
+x=itertools.combinations(range(n),n//2)
+
 for i,idx in zip(x,range(c)):
-    print(i)
+    #print(i)
     if(idx<c//2):
         gap[idx]+=score(i)
     else:
