@@ -1,57 +1,29 @@
-'''
-6 6
-
-  0   1   2   3   4   5
- 19  20  21  22  23   6
- 18  31  32  33  24   7
- 17  30  35  34  25   8
- 16  29  28  27  26   9
- 15  14  13  12  11  10
-위처럼 6 6이라는 입력을 주면 6 X 6 매트릭스에 나선형 회전을 한 값을 출력해야 한다.
-'''
-
-def RIGHT(i,j):
-    global n,cnt
-    if(n==0): return
-    for x in range(n):
-        matrix[i][j+x]=cnt
-        cnt+=1
-    n-=1
-    DOWN(i+1,j+n)
-def DOWN(i,j):
-    global m,cnt
-    if(m==0): return
-    for x in range(m):
-        matrix[i+x][j]=cnt
-        cnt+=1
-    m-=1
-    LEFT(i+m,j-1)
-def LEFT(i,j):
-    global n,cnt
-    if(n==0): return
-    for x in range(n):
-        matrix[i][j-x]=cnt
-        cnt+=1
-    n-=1
-    UP(i-1,j-n)
-def UP(i,j):
-    global m,cnt
-    if(m==0): return
-    for x in range(m):
-        matrix[i-x][j]=cnt
-        cnt+=1
-    m-=1
-    RIGHT(i-m,j+1)
-    
 import sys
+import heapq
 input=sys.stdin.readline
-n,m=map(int,input().split()) #n: 가로,m: 세로
-matrix=[[0]*n for _ in range(m)]
+n=int(input())
 
-# RIGHT -> DOWN -> LEFT -> UP
-# n : n~1  // m: m-1 ~ 1
-m-=1
-cnt=0
-RIGHT(0,0)
-for x in matrix:
-    print(x)
+larger=[]
+smaller=[]
+
+median=int(input())
+print(median)
+for i in range(n-1):
+    x=int(input())
+    if(x>=median):
+        heapq.heappush(larger,x)
+    else:
+        heapq.heappush(smaller,-x)
+
+    if(len(larger)>len(smaller)+1):
+        heapq.heappush(smaller,-median)
+        median=heapq.heappop(larger)
+    if(len(smaller)>len(larger)):
+        heapq.heappush(larger,median)
+        median=heapq.heappop(smaller)
+        median*=-1
+    print(median)
+
+        
+    
+    
