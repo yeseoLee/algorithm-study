@@ -20,4 +20,5 @@
 11. | 매번 직접 구현하지말고 최대한 라이브러리를 활용하는 습관을 가지자. 특히 math
 12. | 2차원 배열 초기화 array = [[0 for col in range(w)] for row in range(h)] 또는 array = [[0]*w for i in range(h)]
 || 예를 들어 w이 2, h이 3이면 [[0,0],[0,0][0,0]]즉 array[w][h]과 같다.
-13. | '''꿀팁: 3차원 배열은 [layer][row][colunm] 순이다.'''
+13. | '''3차원 배열은 [layer][row][colunm] 순이다.'''
+14. | '''reversed 함수는 단순히 iterator를 반환하고, 슬라이싱 [::-1]은 객체를 반환한다.'''
