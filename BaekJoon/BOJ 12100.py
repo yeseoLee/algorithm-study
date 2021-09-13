@@ -2,9 +2,21 @@ import sys
 from collections import deque
 input = sys.stdin.readline # n x n
 
+#  (O(N^2)) X 4(direction)^5(depth) -> (O(N^2 4^5))
 n=int(input())
 board =[ list(map(int,input().split())) for _ in range(n)]
+ans = 0
 
+def move(k):
+    if k ==0:
+        move_up()
+    elif k==1:
+        move_down()
+    elif k==2:
+        move_left()
+    else:
+        move_right()
+        
 def move_up():
     for j in range(n):
         que=deque([])
@@ -20,9 +32,6 @@ def move_up():
             board[x][j]=tmp
             x+=1
             
-    for i in board:
-        print(i)
-            
 def move_down():
     for j in range(n):
         que=deque([])
@@ -37,9 +46,6 @@ def move_down():
                 tmp+=que.pop()
             board[x][j]=tmp
             x-=1
-            
-    for i in board:
-        print(i)
 
 def move_left():
     for i in range(n):
@@ -55,9 +61,6 @@ def move_left():
                 tmp+=que.popleft()
             board[i][x]=tmp
             x+=1
-            
-    for i in board:
-        print(i)
 
 def move_right():
     for i in range(n):
@@ -73,8 +76,18 @@ def move_right():
                 tmp+=que.pop()
             board[i][x]=tmp
             x-=1
-            
-    for i in board:
-        print(i)
 
+def solve(cnt):
+    global board, ans
+    if cnt == 5:
+        for i in range(n):
+            ans = max(ans, max(board[i]))
+        return
+    b = [x[:] for x in board]
+    for k in range(4):
+        move(k)
+        solve(cnt+1)
+        board = [x[:] for x in b]
 
+solve(0)
+print(ans)   
