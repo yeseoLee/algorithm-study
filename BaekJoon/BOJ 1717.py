@@ -64,6 +64,7 @@ for i in range(m):
 '''
 
 import sys
+sys.setrecursionlimit(10**8) #RecursionError
 input = sys.stdin.readline
     
 n,m=map(int,input().split())
@@ -72,14 +73,14 @@ parent = [x for x in range(n+1)]
 def find(target):
     if target == parent[target]:
         return target
-    else:
-        return find(parent[target])
+    parent[target]=find(parent[target])
+    return parent[target]
 
 def union(a,b):
     a = find(a)
     b = find(b)
 
-    if a<b:
+    if a < b:
         parent[b] = a
     else:
         parent[a] = b
