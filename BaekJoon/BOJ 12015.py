@@ -1,21 +1,23 @@
-def isPos(x):
-    dp = [0]*n
-n=int(input())
-arr=list(map(int,input().split()))
+import sys
+from bisect import bisect_left
+input = sys.stdin.readline
 
-max_len=0
-start,end=1,n #수열의 길이
-while(start<=end):
-    mid=(start+end)//2
-    for i in range(mid,n+1):
-        if(isPos(i)):
-            max_len=mid
-            l=mid+1 #길이 확대
-            break
-    else:
-        r=mid-1 #길이 축소
+n = int(input())
+a = list(map(int, input().rsplit()))
+lis = [] #longest increasing subsequence
+ans = 0
 
-
-5 20 10 30
-
-1 2 2 3
+for num in a: # O(n)
+    if not lis:
+        lis.append(num)
+        ans += 1
+        continue
+    
+    if lis[-1] < num: # 더 큰 수 -> 수열 뒤에 연결
+        lis.append(num)
+        ans += 1
+    else: #더 작은 수 -> 이진탐색으로 들어갈 위치를 찾아서 기존 값과 교체 O(logn)
+        index = bisect_left(lis, num)
+        lis[index] = num
+    
+print(ans)
