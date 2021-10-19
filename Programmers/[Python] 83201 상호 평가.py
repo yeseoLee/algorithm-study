@@ -23,3 +23,4 @@ def solution(scores):
         else:
             answer+='F'
     return answer
+
