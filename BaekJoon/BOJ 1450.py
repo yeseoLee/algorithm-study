@@ -1,15 +1,27 @@
+''' TimeLimit
 import sys
 input=sys.stdin.readline
 n,c=map(int,input().split()) #n: 물건 개수, c: 최대 용량
 items=list(map(int,input().split()))
+items=sorted(items)
 
-items=[item for item in sorted(items) if item<=c]
+cnt=1
+def func(start,now):
+    global cnt
+    for i in range(start,n):
+        now+= items[i]
+        if now>c:
+            break
+        else:
+            cnt+=1
+            func(i+1,now)
+        now-=items[i]
 
-cnt=1+n #아무것도 안넣었을 때+하나만 넣었을 때
-
-
-
+func(0,0)
+print(cnt)
 '''
+
+''' binarysearch
 import sys
 
 N, C = map(int, sys.stdin.readline().split())
@@ -46,3 +58,37 @@ for i in lsum:
     
 print(result)
 '''
+
+#Two Pointer
+import sys
+
+N, C = map(int, sys.stdin.readline().split())
+weight = list(map(int, sys.stdin.readline().split())) 
+left = weight[:N // 2] 
+right = weight[N // 2:] 
+lsum = [] 
+rsum = []
+result=0
+
+#now_idx, now_sum, weight, lsum or rsum
+def dfs(idx,now,warr,sumarr):
+    if idx >= len(warr):
+        sumarr.append(now)
+        return
+    dfs(idx+1,now,warr,sumarr) #미포함
+    dfs(idx+1,now+warr[idx],warr,sumarr) #포함
+
+dfs(0,0,left,lsum)
+dfs(0,0,right,rsum)
+lsum.sort()
+rsum.sort()
+
+rp=len(rsum)-1
+for lp in range(len(lsum)):
+    while rp>=0 and lsum[lp]+rsum[rp] > C:
+        rp-=1
+    if rp<0:
+        break
+    result+=rp+1
+
+print(result)
