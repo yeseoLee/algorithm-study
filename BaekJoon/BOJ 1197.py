@@ -1,12 +1,11 @@
 import sys
-import heapq
 input=sys.stdin.readline
 v,e=map(int,input().split())
 elist=[]
 for i in range(e):
     elist.append(list(map(int,input().split())))
-elist.sort(key=lamda x : x[2])
-parent=[for i in range(1,v+1)]
+elist.sort(key=lambda x : x[2])
+parent=[i for i in range(v+1)]
 
 def union(a,b):
     a = find(a)
