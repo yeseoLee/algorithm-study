@@ -1,21 +1,24 @@
 import sys
+from collections import deque
 input = sys.stdin.readline
 
 n,m,k = map(int,input().split())
 A = [list(map(int,input().split())) for _ in range(n)]
 a = [[5 for col in range(n)] for row in range(n)]
-tree=[[[] for col in range(n)] for row in range(n)]
+tree=[[deque() for col in range(n)] for row in range(n)]
+ans=0
 for i in range(m):
     x,y,z = map(int,input().split())
     tree[x-1][y-1].append(z)
+    ans+=1
+dx,dy=[0,0,+1,+1,+1,-1,-1,-1],[+1,-1,0,+1,-1,0,+1,-1]
 
 def year():
+    global ans
     breeding=[]
     for i in range(n):
         for j in range(n):
             if tree[i][j]:
-                tree[i][j].sort()
-                l=len(tree[i][j])
                 for t in range(len(tree[i][j])):  # 봄 성장
                     if a[i][j]>=tree[i][j][t]:
                         a[i][j]-=tree[i][j][t]
@@ -24,20 +27,19 @@ def year():
                         if tree[i][j][t]%5==0:
                             breeding.append((i, j))
                     else:
-                        l=t
+                        while t < len(tree[i][j]):
+                            a[i][j] += (tree[i][j].pop()//2)
+                            ans -=1
                         break
-                for age in tree[i][j][l:]:  # 여름 양분화
-                    a[i][j] += age//2
-                tree[i][j] = tree[i][j][:l]
             #겨울 양분 추가
             a[i][j]+=A[i][j]
     #가을 번식
-    dx,dy=[0,0,+1,+1,+1,-1,-1,-1],[+1,-1,0,+1,-1,0,+1,-1]
     for x,y in breeding:
         for i in range(8):
             nx,ny=x+dx[i],y+dy[i]
             if 0<=nx<n and 0<=ny<n:
-                tree[nx][ny].append(1)
+                tree[nx][ny].appendleft(1)
+                ans+=1
 
 def count_trees():
     result=0
