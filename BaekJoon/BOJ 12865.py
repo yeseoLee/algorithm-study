@@ -1,21 +1,18 @@
 import sys
 n,k=map(int,sys.stdin.readline().split())
-a=[]
+w,v=[0],[0]
 for i in range(n):
-    a.append(list(map(int,sys.stdin.readline().split())))
-dp=[0 for i in range(k+1)]
+    a,b=map(int,input().split())
+    w.append(a)
+    v.append(b)
+dp=[[0 for col in range(k+1)]for row in range(n+1)]
 
 
-for i in range(n):
-    for j in range(k, 1, -1):
-        if(a[i][0] <= j):
-            dp[j]=max(dp[j],dp[j-a[i][0]] +a[i][1])
+for i in range(1,n+1):
+    for j in range(1,k+1):
+        if j >= w[i]:
+            dp[i][j] = max(dp[i-1][j],dp[i-1][j-w[i]]+v[i])
+        else:
+            dp[i][j] = dp[i-1][j]
 
-print(dp[-1])
-"""
-못푼문제
-방향을 이상하게 잡았음
-"""
-
-
-                
+print(dp[n][k])
