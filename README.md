@@ -8,3 +8,5 @@
 3. 알고리즘 개념이나 문제 풀이 관련 스터디 노트
 
 4. PS에 관한 한줄 메모
+
+[알고리즘 & 자료구조 포스팅 with 파이썬](https://velog.io/@yeseolee?tag=python)
