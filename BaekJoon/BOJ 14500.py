@@ -1,3 +1,11 @@
+'''
+   ㅇ
+   ㅇ
+ㅇㅇ
+이 모양 처리해야함
+그외 예외 있는지 그려보면서 확
+'''
+
 import sys
 sys.setrecursionlimit(10**8)
 input=sys.stdin.readline
