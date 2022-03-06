@@ -1,3 +1,38 @@
+import sys
+sys.setrecursionlimit(10**8)
+input=sys.stdin.readline
+
+n,m = map(int,input().split())
+arr=[]
+for i in range(n):
+    arr.append(list(map(int,input().split())))
+
+max_sum=0
+
+def dfs(i,j,now_sum,cnt):
+    global max_sum
+    if i<0 or i>=n or j<0 or j>=m or cnt>4:
+        return
+    new_sum=now_sum+arr[i][j]
+    if cnt==4:
+        max_sum=max(max_sum,new_sum)
+        return
+    dfs(i+1,j,new_sum,cnt+1)
+    dfs(i,j+1,new_sum,cnt+1)
+    
+    if 0<=j-1 and j+1<m: # ㅜ,ㅗ
+        dfs(i+1,j,new_sum+arr[i][j-1]+arr[i][j+1],cnt+3)
+        dfs(i-1,j,new_sum+arr[i][j-1]+arr[i][j+1],cnt+3)
+    if 0<=i-1 and i+1<n: # ㅏ,ㅓ
+        dfs(i,j+1,new_sum+arr[i-1][j]+arr[i+1][j],cnt+3)
+        dfs(i,j-1,new_sum+arr[i-1][j]+arr[i+1][j],cnt+3)
+for i in range(n):
+    for j in range(m):
+        dfs(i,j,0,1)
+
+print(max_sum)
+
+
 '''일일이 찾는 방법
 n,m=map(int,input().split()) # 세로 N 가로 M
 arr=[list(map(int,input().split())) for i in range(n)]
