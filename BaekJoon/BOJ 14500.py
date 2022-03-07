@@ -1,11 +1,3 @@
-'''
-   ㅇ
-   ㅇ
-ㅇㅇ
-이 모양 처리해야함
-그외 예외 있는지 그려보면서 확
-'''
-
 import sys
 sys.setrecursionlimit(10**8)
 input=sys.stdin.readline
@@ -17,7 +9,7 @@ for i in range(n):
 
 max_sum=0
 
-def dfs(i,j,now_sum,cnt):
+def dfs(i,j,d,now_sum,cnt):
     global max_sum
     if i<0 or i>=n or j<0 or j>=m or cnt>4:
         return
@@ -25,18 +17,29 @@ def dfs(i,j,now_sum,cnt):
     if cnt==4:
         max_sum=max(max_sum,new_sum)
         return
-    dfs(i+1,j,new_sum,cnt+1)
-    dfs(i,j+1,new_sum,cnt+1)
-    
-    if 0<=j-1 and j+1<m: # ㅜ,ㅗ
-        dfs(i+1,j,new_sum+arr[i][j-1]+arr[i][j+1],cnt+3)
-        dfs(i-1,j,new_sum+arr[i][j-1]+arr[i][j+1],cnt+3)
-    if 0<=i-1 and i+1<n: # ㅏ,ㅓ
-        dfs(i,j+1,new_sum+arr[i-1][j]+arr[i+1][j],cnt+3)
-        dfs(i,j-1,new_sum+arr[i-1][j]+arr[i+1][j],cnt+3)
+
+    if d==0:
+        dfs(i+1,j,0,new_sum,cnt+1)
+        dfs(i,j+1,1,new_sum,cnt+1)
+        dfs(i,j-1,2,new_sum,cnt+1)
+    elif d==1:
+        dfs(i+1,j,0,new_sum,cnt+1)
+        dfs(i,j+1,1,new_sum,cnt+1)
+    elif d==2:
+        dfs(i+1,j,0,new_sum,cnt+1)
+        dfs(i,j-1,2,new_sum,cnt+1)
+
+    if cnt==1:
+        if 0<=j-1 and j+1<m: # ㅜ,ㅗ
+            dfs(i+1,j,0,new_sum+arr[i][j-1]+arr[i][j+1],cnt+3)
+            dfs(i-1,j,3,new_sum+arr[i][j-1]+arr[i][j+1],cnt+3)
+        if 0<=i-1 and i+1<n: # ㅏ,ㅓ
+            dfs(i,j+1,1,new_sum+arr[i-1][j]+arr[i+1][j],cnt+3)
+            dfs(i,j-1,2,new_sum+arr[i-1][j]+arr[i+1][j],cnt+3)
+
 for i in range(n):
     for j in range(m):
-        dfs(i,j,0,1)
+        dfs(i,j,0,0,1)
 
 print(max_sum)
 
