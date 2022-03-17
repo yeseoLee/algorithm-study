@@ -1,3 +1,4 @@
+'''
 import sys
 from collections import deque
 input = sys.stdin.readline
@@ -24,7 +25,7 @@ while (que):
                 que.appendleft(next)
 
 print(dp[k])
-
+'''
 
 '''
 import sys
