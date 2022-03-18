@@ -11,20 +11,18 @@ def dfs(i,j):
     que=deque([])
     que.append([i,j])
     unite=[]
-    sum_unite=0
     while(que):
         x,y = que.popleft()
         unite.append([x,y])
-        sum_unite+=arr[x][y]
         for k in range(4):
             nx,ny = x+dx[k],y+dy[k]
             if 0<=nx<n and 0<=ny<n and not visited[nx][ny] and l <= abs(arr[x][y] - arr[nx][ny]) <= r:
                 visited[nx][ny]=True
                 que.append([nx,ny])
-    return [sum_unite,unite]
+    return unite
 
-def move_unite(sum_unite,unite):
-    population = sum_unite // len(unite)
+def move_unite(unite):
+    population = sum([arr[x][y] for x, y in unite]) // len(unite)
     for x,y in unite:
         arr[x][y] = population
 
@@ -35,9 +33,9 @@ while(True):
     for i in range(n):
         for j in range(n):
             if not visited[i][j]:
-                sum_unite, unite = dfs(i,j)
+                unite = dfs(i,j)
                 if len(unite)!=1:
-                    move_unite(sum_unite,unite)
+                    move_unite(unite)
                     flag=0
     if flag:
         break
