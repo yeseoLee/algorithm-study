@@ -1,13 +1,14 @@
 # BOJ 2252 줄 세우기 골드3
 
 import sys
+from collections import deque
 input = sys.stdin.readline
 
 N, M = map(int, input().split())
 
 li = [list(map(int, input().split())) for _ in range(M)]
 
-# case 1.
+# case 1. TIME_LIMIT
 '''
 stack = list()
 for v in li:
@@ -37,33 +38,31 @@ while(len(stack)):
     print(stack.pop(),end= " ")
 '''
 
-# case 2.
-front = [[] for x in range(N+1)]
-back = [[] for x in range(N+1)]
-for A, B in li:
-    front[B].append(A)
-    back[A].append(B)
+# case 2. 위상 정렬
+graph = [[] for x in range(N+1)]
+indegree = [0]*(N+1)
+indegree[0] = -1
 
 result = []
-stack = []
-for i in range(1, N+1):
-    if not back[i] and front[i]:
-        result.append(i)
-        for v in front[i]:
-            result.append(v)
-            if i in back[v]:
-                back[v].remove(i)
-            if v < i and not back[v]:
-                stack.append(v)
 
-while len(stack):
-    i = stack.pop()
-    for v in front[i]:
-        result.append(v)
-        if i in back[v]:
-            back[v].remove(i)
-        if not back[v]:
-            stack.append(v)
+for A, B in li:
+    graph[A].append(B)
+    indegree[B] += 1
 
-while (len(result)):
-    print(result.pop(), end=" ")
+que = deque()
+for i, v in enumerate(indegree):
+    if v == 0:
+        que.append(i)
+
+while len(que):
+    now = que.pop()
+    result.append(now)
+    for next in graph[now]:
+        indegree[next] -= 1
+        if indegree[next] == 0:
+            que.append(next)
+        elif indegree[next] < 0:
+            print("CYCLE")
+            exit(0)
+
+print(*result)
