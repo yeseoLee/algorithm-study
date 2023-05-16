@@ -2,3 +2,6 @@
 .DS_Store
 .vscode/tasks.json
 ./스터디노트/test.*
+./스터디노트/test
+./스터디노트/test.c
+./스터디노트/test.py
