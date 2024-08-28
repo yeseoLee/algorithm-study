@@ -1,27 +1,27 @@
 from sys import stdin
 
-def getArea(a,b,c):
-    area=10
-    return area
 
-n=int(stdin.readline())
-dot=[[0]*2 for i in range(n)]
-for i in dot:
-    i[0],i[1]=map(int,stdin.readline().split())
+# CCW(counter clockwise) 알고리즘
+def CCW(a, b, c):
+    # 두 벡터의 외적의 크기는 두 벡터가 만드는 평행사변형의 넓이
+    # 반시계 방향: 양수 / 시계 방향: 빠지게 된다.
 
-"""
-(n-2)개의 삼각형 결정 => 각 삼각형 넒이들의 합
-재귀함수?  n각형 넓이 = 하나의 삼각형 넓이+(n-1)각형의 넓이
-도형이 두개로 분리 될 수도...
-오목다각형이나 볼록다각형은 아무 점이나 잡아선 안된다.
-n점이라고 꼭 n각형일 필요는 없다( 3점이 일직선상에 존재)
-1.임의의 두점에서 가장 가까운 한점 선택(x)
-2.가장 좁은 각을 이루는 세 점(x)
-3.보조선(x)
-4. 삼각형 한개와 (n-1)각형 한개로 분리시켜주는 선을 찾아라
+    ab = (b[0] - a[0], b[1] - a[1])
+    ac = (c[0] - a[0], c[1] - a[1])
 
-두점을 잇는 직선이 다각형 내부에 있냐?
-나중에 이어풀자
+    return ab[0] * ac[1] - ab[1] * ac[0]
 
 
-"""
+n = int(stdin.readline())
+dots = [[0] * 2 for i in range(n)]
+for i in dots:
+    i[0], i[1] = map(int, stdin.readline().split())
+
+
+area = 0
+for i in range(len(dots) - 1):
+    # 다각형이 볼록일 때는 겹치는 영역이 없어(0 또는 양수) 상관없음
+    # 오목일 때는 겹치는 삼각형이 생기는데, 이 때 외적 값이 음수이기 때문에 더했을 때 자연스럽게 빠지게 된다.
+    area += CCW(dots[0], dots[i], dots[i + 1]) / 2
+
+print(round(abs(area), 1))
