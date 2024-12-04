@@ -1,3 +1,6 @@
+from typing import List
+
+
 # 0 ms / 22.5 MB
 class Solution:
     def reverseString(self, s: List[str]) -> None:

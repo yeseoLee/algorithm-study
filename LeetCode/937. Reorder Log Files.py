@@ -1,3 +1,7 @@
+from typing import List
+
+
+# 3 ms / 17.4 MB
 class Solution:
     def reorderLogFiles(self, logs: List[str]) -> List[str]:
         digit = []
