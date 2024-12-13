@@ -1,27 +1,32 @@
+from typing import Optional
+
+
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 
-#sol 1 - iterate
+# 0ms / 18.66 MB
 class Solution:
-    def reverseList(self, head: ListNode) -> ListNode:
-        node,prev = head, None
-        
-        while node:
-            next,node.next = node.next, prev
-            prev, node = node, next
-        return prev
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return None
 
-#sol 2 - recursive
-class Solution:
-    def reverseList(self, head: ListNode) -> ListNode:
-        def reverse(node: ListNode, prev: ListNode = None):
-            if not node:
-                return prev
-            next,node.next = node.next,prev
-            return reverse(next,node)
-        
-        return reverse(head)
+        stack = []
+        node = head
+
+        while node is not None:
+            stack.append(node.val)
+            node = node.next
+        reversed_head = ListNode()
+        node = reversed_head
+
+        while stack:
+            node.val = stack.pop()
+            if stack:
+                node.next = ListNode()
+                node = node.next
+
+        return reversed_head
