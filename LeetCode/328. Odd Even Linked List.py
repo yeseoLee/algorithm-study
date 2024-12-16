@@ -1,44 +1,29 @@
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
-class Solution:
-    def oddEvenList(self, head: ListNode) -> ListNode:
-        #예외처리
-        if not (head and head.next):
-            return head
-        #짝수 리스트 저장
-        e_list=head.next
-        #짝수끼리/홀수끼리 연결
-        odd,even=head,head.next
-        while(even and even.next):
-            odd.next=odd.next.next
-            even.next=even.next.next
-            odd=odd.next
-            even=even.next
-        #합해서 반환
-        odd.next=e_list
-        return head
+from typing import Optional
+
 
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+# 0 ms / 18.95 MB
 class Solution:
-    def oddEvenList(self, head: ListNode) -> ListNode:
-        #예외처리
-        if head is None:
-            return None
-        
-        odd=head
-        even = head.next
-        even_head = head.next
-        
-        while even and even.next:
-            odd.next, even.next = odd.next.next,even.next.next
-            odd,even = odd.next, even.next
-        
+    def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+
+        odd_head, even_head = head, head.next
+        odd, even = odd_head, even_head
+        while True:
+            odd.next = odd.next.next if odd.next and odd.next.next else None
+            odd = odd.next if odd.next else odd
+            even.next = even.next.next if even.next and even.next.next else None
+            even = even.next if even.next else even
+
+            if not (odd.next and even.next):
+                break
+
         odd.next = even_head
-        return head
+        return odd_head
