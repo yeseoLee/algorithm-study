@@ -1,40 +1,44 @@
+from typing import Optional
+
+
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
-#Swap value
-class Solution:
-    def swapPairs(self, head: ListNode) -> ListNode:
-        node=head
-        while(node and node.next):
-            node.val,node.next.val=node.next.val,node.val
-            node=node.next.next
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+# 0 ms / 17.44 MB
+class SolutionSwapValue:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
+
+        odd, even = head, head.next
+        while odd and even:
+            print(odd.val, even.val)
+            odd.val, even.val = even.val, odd.val
+            odd = even.next if even else None
+            even = odd.next if odd else None
         return head
 
-#Swap Node
-class Solution:
-    def swapPairs(self, head: ListNode) -> ListNode:
-        root=prev=ListNode(None)
-        prev.next=head
-        while head and head.next:
-            #교환 (prev->head->next 에서 prev->next->head)
-            next = head.next
-            head.next = next.next
-            next.next=head
-            prev.next=next
-            #이동
-            head = head.next
-            prev = prev.next.next
-        
-        return root.next
 
-#recursive
-class Solution:
-    def swapPairs(self, head: ListNode) -> ListNode:
-        if head and head.next:
-            p = head.next
-            head.next = self.swapPairs(p.next)
-            p.next = head
-            return p
-        return head
+# 0 ms / 17.15 MB
+class SolutionSwapNode:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+
+        dummy = ListNode()
+        dummy.next = head
+
+        prev, now = dummy, head
+        while prev and now and now.next:
+            prev.next = now.next
+            now.next = now.next.next
+            prev.next.next = now
+
+            prev = now
+            now = now.next
+
+        return dummy.next
