@@ -1,16 +1,15 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
-        table = {
-            ')': '(',
-            '}': '{',
-            ']': '[',
+        ch_map = {
+            ")": "(",
+            "]": "[",
+            "}": "{",
         }
-        
-        for char in s:
-            if char not in table:
-                stack.append(char)
-            elif not stack or table[char] != stack.pop():
-                return False
-            
+        for ch in list(s):
+            if ch not in ch_map:
+                stack.append(ch)
+            else:
+                if not stack or ch_map[ch] != stack.pop():
+                    return False
         return len(stack) == 0
