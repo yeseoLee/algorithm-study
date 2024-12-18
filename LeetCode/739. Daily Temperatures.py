@@ -1,15 +1,15 @@
+from typing import List
+
+
+# 72 ms / 27.59 MB
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        stack,result = [] , [0]*len(temperatures)
-        
-        for idx in range(len(temperatures)):
-            while stack and temperatures[stack[-1]] < temperatures[idx]: # warmer day
-                tmp=stack.pop()
-                result[tmp] = idx-tmp
-            stack.append(idx)
-        
-        # no wamer day
-        while stack:
-            result[stack.pop()]=0
-        
+        stack = []
+        result = [0] * len(temperatures)
+        for i, t in enumerate(temperatures):
+            while stack and t > temperatures[stack[-1]]:
+                k = stack.pop()
+                result[k] = i - k
+            else:
+                stack.append(i)
         return result
