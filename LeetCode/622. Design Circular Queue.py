@@ -1,39 +1,71 @@
-class MyCircularQueue:
+from collections import deque
+
+
+# 3 ms / 18.65 MB
+class MyCircularQueueByQueue:
     def __init__(self, k: int):
-        self.len=k+1
-        self.cq=[0]*self.len
-        self.front=0
-        self.rear=0
+        self.que = deque()
+        self.k = k
 
     def enQueue(self, value: int) -> bool:
         if self.isFull():
             return False
-        else:
-            self.rear = (self.rear+1) % self.len
-            self.cq[self.rear]=value
-            return True
-        
+        self.que.append(value)
+        return True
+
     def deQueue(self) -> bool:
         if self.isEmpty():
             return False
-        else:
-            self.front = (self.front+1) % self.len
-            return True
+        self.que.popleft()
+        return True
 
     def Front(self) -> int:
         if self.isEmpty():
             return -1
-        else:
-            return self.cq[(self.front+1) % self.len]
-    
+        return self.que[0]
+
     def Rear(self) -> int:
         if self.isEmpty():
             return -1
-        else:
-            return self.cq[self.rear]
+        return self.que[-1]
 
     def isEmpty(self) -> bool:
-        return self.front==self.rear
+        return len(self.que) == 0
 
     def isFull(self) -> bool:
-        return (self.rear+1)%self.len == self.front
+        return len(self.que) == self.k
+
+
+# 1 ms / 18.46 MB
+class MyCircularQueueByArray:
+    def __init__(self, k: int):
+        self.que = [-1] * k
+        self.k = k
+        self.f = 0
+        self.r = -1
+
+    def enQueue(self, value: int) -> bool:
+        if self.isFull():
+            return False
+        self.r = (self.r + 1) % self.k
+        self.que[self.r] = value
+        return True
+
+    def deQueue(self) -> bool:
+        if self.isEmpty():
+            return False
+        self.que[self.f] = -1
+        self.f = (self.f + 1) % self.k
+        return True
+
+    def Front(self) -> int:
+        return self.que[self.f]
+
+    def Rear(self) -> int:
+        return self.que[self.r]
+
+    def isEmpty(self) -> bool:
+        return self.que[self.f] == -1
+
+    def isFull(self) -> bool:
+        return self.que[self.r] != -1 and (self.r + 1) % self.k == self.f
