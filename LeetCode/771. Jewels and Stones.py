@@ -1,13 +1,14 @@
-#collections.Counter
-class Solution:
-    def numJewelsInStones(self, jewels: str, stones: str) -> int:
-        stone_counter = collections.Counter(stones)
-        cnt=0
-        for jewel in jewels:
-            cnt+=stone_counter[jewel]
-        return cnt
+from collections import defaultdict
 
-#Pythonic Way
+
+# 0 ms / 17.87 MB
 class Solution:
     def numJewelsInStones(self, jewels: str, stones: str) -> int:
-        return sum(s in jewels for s in stones)
+        stone_table = defaultdict(int)
+        for stone in stones:
+            stone_table[stone] += 1
+
+        answer = 0
+        for jewel in jewels:
+            answer += stone_table[jewel]
+        return answer
