@@ -1,83 +1,49 @@
+# 964ms / 177.52 MB
+class Node:
+    def __init__(self, key=None, val=None):
+        self.key = key
+        self.val = val
+        self.next = None
+
+
 class MyHashMap:
     def __init__(self):
         self.size = 1000
-        self.table = collections.defaultdict(ListNode)
+        self.k = 23
+        self.hash = [None] * self.size
 
     def put(self, key: int, value: int) -> None:
-        index = key % self.size
-        if self. table[index].value is None:
-            self.table[index] = ListNode(key,value)
-            return
-        p = self.table[index]
-        while p:
-            if p.key == key:
-                p.value = value
+        if not self.hash[(key + self.k) % self.size]:
+            self.hash[(key + self.k) % self.size] = Node(key, value)
+
+        node = self.hash[(key + self.k) % self.size]
+        while node:
+            if node.key == key:
+                node.val = value
                 return
-            if p.next is None:
-                break
-            p = p.next
-        p.next = ListNode(key,value)
+            node = node.next
+        node = Node(key, value)
 
     def get(self, key: int) -> int:
-        index = key % self.size
-        if self.table[index].value is None:
-            return -1
-        p = self.table[index]
-        while p:
-            if p.key == key:
-                return p.value
-            p = p.next
+        node = self.hash[(key + self.k) % self.size]
+        while node:
+            if node.key == key:
+                return node.val
         return -1
+
     def remove(self, key: int) -> None:
-        index = key % self.size
-        if self.table[index].value is None:
+        node = self.hash[(key + self.k) % self.size]
+        if not node or not node.next:
+            self.hash[(key + self.k) % self.size] = None
             return
-        #first node
-        p = self.table[index]
-        if p.key == key:
-            self.table[index] = ListNode() if p.next is None else p.next
-        #else node
-        prev = p
-        while p:
-            if p.key == key:
-                prev.next = p.next
+
+        prev = node
+        while node:
+            if node.key == key:
+                prev.next = node.next
                 return
-            prev, p = p,p.next
-
-class ListNode:
-    def __init__(self, key=None, value=None):
-        self.key = key
-        self.value = value
-        self.next = None
-
-# Your MyHashMap object will be instantiated and called as such:
-# obj = MyHashMap()
-# obj.put(key,value)
-# param_2 = obj.get(key)
-# obj.remove(key)
-
-'''dictonary
-class MyHashMap:
-
-    def __init__(self):
-        self.hashmap={}
-        
-
-    def put(self, key: int, value: int) -> None:
-        self.hashmap[key]=value
-        
-
-    def get(self, key: int) -> int:
-        if key in self.hashmap:
-            return self.hashmap[key]
-        else:
-            return -1
-        
-
-    def remove(self, key: int) -> None:
-        if key in self.hashmap:
-            del self.hashmap[key]
-        
+            prev = node
+            node = node.next
 
 
 # Your MyHashMap object will be instantiated and called as such:
@@ -85,4 +51,3 @@ class MyHashMap:
 # obj.put(key,value)
 # param_2 = obj.get(key)
 # obj.remove(key)
-'''
